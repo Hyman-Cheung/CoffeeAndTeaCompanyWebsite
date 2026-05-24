@@ -1,0 +1,218 @@
+<!--
+  Student Name: Cheung Hing Lam 
+  SID: 20241431
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Tea</title>
+		<style type="text/css">
+			body
+			{
+				background-image:url(image/tea/tea_background.jpg);
+			}
+			.menu
+			{
+				width:80%;
+				background-color:#FFFFFF;
+				overflow:hidden;
+				padding:20px;
+				margin-bottom:30px;
+				border:double 13px;
+				border-radius:30px;
+				box-shadow: 3px 3px 3px 1px #161616;
+				text-align:center;
+				font-size:20px;
+				font-family:cursive;
+				visibility:visible;
+			}
+			canvas:hover
+			{
+				box-shadow: 3px 3px 3px 1px #262626, 1px 1px 1px 3px #262626;
+				border-radius:13px;
+			}
+			.imgOuter
+			{
+				width:800px;
+				height:400px;
+			}
+			.description
+			{
+				text-align:left;
+			}
+			.description:first-letter
+			{
+				font-size:53px;
+			}
+			.canter
+			{
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			//************* Fade-in slideshow *************
+			// Define an arrays for storing images:
+			let products = 
+			[
+				["whiteTea/whiteTea_1.jpg","whiteTea/whiteTea_2.jpg","whiteTea/whiteTea_3.jpg"],
+				["blackTea/blackTea_1.jpg","blackTea/blackTea_2.jpg","blackTea/blackTea_3.jpg"],
+				["greenTea/greenTea_1.jpg","greenTea/greenTea_2.jpg","greenTea/greenTea_3.jpg"],
+				["puErhTea/puErhTea_1.jpg","puErhTea/puErhTea_2.jpg","puErhTea/puErhTea_3.jpg"],
+				["oolongTea/oolongTea_1.jpg","oolongTea/oolongTea_2.jpg","oolongTea/oolongTea_3.jpg"]
+			];
+			// Define a variable for recording which image that will be displayed:
+			let count = 1;
+			// Define a image object:
+			let imgObj = new Image();
+			// Change the image:
+			function changeImg(imgId,num)
+			{
+				let n = parseInt(num);
+				let img = document.getElementById(imgId);
+				if(count > products[n].length-1)
+				{
+					count = 0;
+				}
+				imgObj.src = "./image/tea/" + products[n][count];
+				document.getElementById(imgId).src = imgObj.src;
+				count++;
+			}
+			// Slideshow:
+			function slideshow(canvasId,imgId,num)
+			{
+				$("#" + canvasId).fadeOut(1000);
+				setTimeout(function(){
+					changeImg(imgId,num);
+				},1000);
+				$("#" + canvasId).fadeIn(1000);
+			}
+
+			
+			//************* Floating Image: *************
+			// A function for displaying the image:
+			function displayImg(x,y,c,img)
+			{				
+				const ctx = c.getContext("2d");						// Get the 2D content
+				ctx.clearRect(0,0,c.width,c.height);
+				ctx.drawImage(img, x, y, c.width*0.6, c.height*0.8);
+			}
+			// Define the FloatingImg class:
+			let FloatingImg = function(canvasId,imgID)
+			{
+				this.c = document.getElementById(canvasId);
+				this.image = document.getElementById(imgID);
+				this.x = this.c.width/5;
+				this.y = this.c.height/8;
+				this.ySpeed = -0.5;
+			};
+			// Call the displayImg() function and assign the arguments (coordinates) to display the image:
+			FloatingImg.prototype.display = function()
+			{
+				displayImg(this.x,this.y,this.c,this.image);
+			};
+			// Let image to move:
+			FloatingImg.prototype.move = function()
+			{
+				this.y += this.ySpeed; 
+			};
+			// Check the collision to ensure the image within the canvas:
+			FloatingImg.prototype.checkCollision = function()
+			{
+				if(this.y > this.c.height/8 || this.y < this.c.height/18)
+				{
+					this.ySpeed = - this.ySpeed;
+				}
+			};
+			
+			// Floating image effect:
+			function floating(canvasId,img)
+			{
+				var floatingImg = new FloatingImg(canvasId,img);				// Create the FloatingImg object
+				setInterval(function(){
+					floatingImg.display();
+					floatingImg.move();
+					floatingImg.checkCollision();
+				},30);
+			}
+			// Execute the following programs when this page is loaded:
+			$(document).ready(function(){
+				floating('canvas_1','img_1');
+				floating('canvas_2','img_2');
+				floating('canvas_3','img_3');
+				floating('canvas_4','img_4');
+				floating('canvas_5','img_5');
+
+			});
+		</script>
+	</head>
+	<body>
+		<!--White tea-->
+		<div class="menu canter">
+			<h1 class="title">White tea</h1>
+			<div class="imgOuter canter">
+				<img id="img_1" src="./image/tea/whiteTea/whiteTea_1.jpg" style="display:none"/>
+				<canvas id="canvas_1" height="380" width="600" onmouseover="slideshow(this.id,img_1.id,0)"></canvas>
+			</div>
+			<blockquote class="description">
+				White tea is a delicate, minimally processed tea that is highly sought after by connoisseurs and enjoyed by experts and novices alike. 
+				White tea has a light body and a mild flavor with a crisp, clean finish. White tea tends to be very low in caffeine, although some silver 
+				tip teas may be slightly higher in caffeine.
+			</blockquote>
+		</div>
+		<!--Black Tea-->
+		<div class="menu canter">
+			<h1 class="title">Black tea</h1>
+			<div class="imgOuter canter">
+				<img id="img_2" src="./image/tea/blackTea/blackTea_1.jpg" style="display:none"/>
+				<canvas id="canvas_2" height="380" width="600" onmouseover="slideshow(this.id,img_2.id,1)"></canvas>
+			</div>
+			<blockquote class="description">
+				Many people new to the world of tea are most familiar with black tea. You can find black tea in name-brand teabags at the grocery store like Lipton or Tetley. 
+				Popular breakfast blends like English Breakfast and Irish Breakfast are other examples of black tea. Black teas tend to be relatively high in caffeine, 
+				with about half as much caffeine as a cup of tea. They brew up a dark, coppery color, and usually have a stronger, more robust flavor than other types of tea. 
+			</blockquote>
+		</div>
+		<!--Green tea-->
+		<div class="menu canter">
+			<h1 class="title">Green tea</h1>
+			<div class="imgOuter canter">
+				<img id="img_3" src="./image/tea/greenTea/greenTea_1.jpg" style="display:none"/>
+				<canvas id="canvas_3" height="380" width="600" onmouseover="slideshow(this.id,img_3.id,2)"></canvas>
+			</div>
+			<blockquote class="description">
+				Green tea is another type of tea made from the camellia sinensis plant. Green teas often brew up a light green or yellow color, and tend to have a lighter
+				body and milder taste. They contain about half as much caffeine as black tea (about a quarter that of a cup of coffee.) Popular green teas include Gunpowder, 
+				Jasmine Yin Cloud, and Moroccan Mint.
+			</blockquote>
+		</div>
+		<!--Pu-erh tea-->
+		<div class="menu canter">
+			<h1 class="title">Pu-erh tea</h1>
+			<div class="imgOuter canter">
+				<img id="img_4" src="./image/tea/puErhTea/puErhTea_1.jpg" style="display:none"/>
+				<canvas id="canvas_4" height="380" width="600" onmouseover="slideshow(this.id,img_4.id,3)"></canvas>
+			</div>
+			<blockquote class="description">
+				Pu-erh tea is an aged, partially fermented tea that is similar to black tea in character. Pu-erh teas brew up an inky brown-black color and have a full body 
+				with a rich, earthy, and deeply satisfying taste. Pu-erh teas are fairly high in caffeine, containing about the same amount as black tea (half that of a cup of coffee.)
+			</blockquote>
+		</div>
+		<!--Oolong tea-->
+		<div class="menu canter">
+			<h1 class="title">Oolong tea</h1>
+			<div class="imgOuter canter">
+				<img id="img_5" src="./image/tea/oolongTea/oolongTea_1.jpg" style="display:none"/>
+				<canvas id="canvas_5" height="380" width="600" onmouseover="slideshow(this.id,img_5.id,4)"></canvas>
+			</div>
+			<blockquote class="description">
+				Oolong is a partially oxidized tea, placing it somewhere in between black and green teas in terms of oxidation. Oolong teas can range from around 10-80% oxidation, 
+				and can brew up anywhere from a pale yellow to a rich amber cup of tea. Many oolongs can be re-infused many times, with subtle differences and nuances of flavor 
+				in each successive cup.
+			</blockquote>
+		</div>
+	</body>
+</html>
