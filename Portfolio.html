@@ -1,0 +1,276 @@
+<!--
+  Student Name: Cheung Hing Lam 
+  SID: 20241431
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Personal portfolio page</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			// Personal information:
+			let personalInfo = 		// Creat a object of my personal information
+			{
+				name:"Cheung Hing Lam",
+				sid:20241431,
+				interest:{
+					description:"Fashion is a dynamic and ever-evolving realm that intertwines creativity, culture, and personal expression. As a passionate enthusiast of fashion, I'm captivated by how it transcends mere clothing and becomes a powerful medium for storytelling and identity. From the latest runway trends to timeless classics, fashion reflects the zeitgeist of different eras while allowing individuals to showcase their unique styles. It serves as a canvas for innovation, where designers push boundaries and set new standards for beauty and functionality. Fashion is not just about what we wear; it's about how we present ourselves to the world and the statement we make through our choices. Whether it's the allure of haute couture or the charm of streetwear, fashion continuously inspires and shapes our perceptions, making it a fascinating topic to explore and celebrate.",
+					link:"https://www.vogue.com/tag/misc/menswear"
+				},
+				email:"20241431@learner.hkuspace.hku.hk"
+			}
+			// Display information
+			$(document).ready(function(){
+				document.getElementById('myName').innerHTML = personalInfo.name;
+				document.getElementById('mySID').innerHTML = personalInfo.sid;
+				document.getElementById('myInterest').innerHTML = personalInfo.interest.description;
+				document.getElementById('myEmail').href = "mailto:" + personalInfo.email;
+				document.getElementById('interest_link').href = personalInfo.interest.link;
+			});
+			
+			
+			// Image player:
+			let fashionImgs = ["fashion_1.jpg","fashion_2.jpg","fashion_3.jpg","fashion_4.jpg","fashion_5.jpg","fashion_6.jpg","fashion_7.jpg","fashion_8.jpg","fashion_9.jpg","fashion_10.jpg"];
+			let imgObjet = new Image();
+			let count = 0;
+			// Next image
+			function nextImg()
+			{
+				count++;
+				if(count>fashionImgs.length-1)
+				{
+					count= 0;
+				}
+				imgObjet.src = "image/fashion/" + fashionImgs[count];
+				document.getElementById('imgPlayer').src = imgObjet.src;
+			}
+			// Previous image
+			function previousImg()
+			{
+				count--;
+				if(count<0)
+				{
+					count= fashionImgs.length-1;
+				} 
+				imgObjet.src = "image/fashion/" + fashionImgs[count];
+				document.getElementById('imgPlayer').src = imgObjet.src;	
+			}
+			// Play or stop the music:
+			let isStart_music = false; 		// for user to stop or start the music
+			function bMusic()
+			{
+				isStart_music=!isStart_music;
+				if(isStart_music)
+				{
+					document.getElementById("music").play();
+					document.getElementById("music_icon").src = "image/audio.png"; 
+				}
+				else
+				{
+					document.getElementById("music").pause();
+					document.getElementById("music_icon").src = "image/noAudio.png";
+				}
+			}
+		</script>
+		<style type="text/css">
+			*
+			{
+				margin:0px;
+				padding:0px;
+			}
+			body
+			{
+				font: verdana, arial, sans-serif;
+				background-image:url(image/bodyBackground_Portfolio.jpg);
+			}
+			
+			/********************Information********************/
+			article
+			{
+				padding:30px;
+			}
+			#informationDiv
+			{
+				background-color:#FFFFFF;
+				padding:30px;
+				border: solid 3px;
+				border-radius:30px;
+				box-shadow: 2px 2px 2px 0px #6a6a6a;
+			}
+			#informationDiv:hover
+			{
+				box-shadow: 2px 2px 2px 3px #2F2F2F,2px 2px 2px 3px #161616;
+			}
+			#personalInfo tr td
+			{
+				float:right;
+				margin:6px;
+			}
+			#myInterest
+			{
+				font-family:cursive;
+				font-weight:bold;
+				padding-top:8px;
+				padding-bottom:15px;
+				padding-left:13px;
+			}
+			
+			/******************** Link ********************/
+			#interest_link
+			{
+				text-decoration:none;
+				font-size:18px;
+				color:#2188b3;
+				font-family:cursive;
+				font-weight:bold;
+				margin:13px;
+				padding:3px;
+			}
+			#interest_link:visited
+			{
+				color:#ff00007;
+			}
+			#interest_link:hover
+			{
+				color:#1fa897;
+			}
+			#interest_link:active
+			{
+				color:#ffc100;
+			}
+			
+			/******************** Music icon ********************/
+			#music_icon
+			{
+				position:relative;
+				float:right;
+				width:50px;
+				height:50px;
+			}
+			#music_icon:hover
+			{
+				 content:url(image/audio.png);
+			}
+			
+			/********************Image player********************/
+			#imgPlayerDiv
+			{
+				position:relative;
+				z-index:0;
+				height:500px;
+				width:600px;
+				padding:30px;
+				box-shadow: 2px 2px 2px 0px #6a6a6a;
+				background-color:#FFFFFF;
+			}
+			#imgPlayerDiv:hover
+			{
+				box-shadow: 2px 2px 2px 3px #2F2F2F,2px 2px 2px 3px #161616;
+			}
+			#imgPlayer
+			{
+				position:relative;
+				border:solid 6px;
+				width:500px;
+				height:400px;
+			}
+			
+			/********************Youtube Video********************/
+			#youtubeDiv
+			{
+				position:relative;
+				z-index:0;
+				height:350px;
+				width:600px;
+				padding:30px;
+				margin-top:50px;
+				margin-bottom:30px;
+				box-shadow: 2px 2px 2px 0px #6a6a6a;
+				background-color:#FFFFFF;
+			}
+			#youtubeDiv:hover
+			{
+				box-shadow: 2px 2px 2px 3px #2F2F2F,2px 2px 2px 3px #161616;
+			}
+			
+			/********************Button********************/
+			.button
+			{
+				background-color:#262626;
+				color:#FFFFFF;
+				margin:13px;
+				padding:3px;
+				font-family:cursive;
+				font-size:18px;
+			}
+			.button:hover
+			{
+				background-color:#FFFFFF;
+				color:#262626;	
+			}
+			.button:active
+			{
+				background-color:#6b787d;
+				color:#FFFFFF;	
+			}
+	
+			/********************Other********************/
+			.center
+			{
+				margin-left:auto;
+				margin-right:auto;
+			}
+			.clearfloat
+			{
+				clear:both;
+			}		
+		</style>
+	</head>
+	<body>
+		<section class="center">
+			<!--Information-->
+			<article>
+				<div id="informationDiv" class="center">
+					<!--Personal information-->
+					<table id="personalInfo">
+						<tr>
+							<td>My Name:</td>
+							<th id="myName"></th>
+						</tr>
+						<tr>
+							<td>SID:</td>
+							<th id="mySID"><th>
+						</tr>
+					</table>
+					<p>My Interest:</p>
+					<p id="myInterest"></p>
+					<!--A button link to a website about my interest:-->
+					<a id="interest_link"  target="_blank">Click Me to know more (VOGUE fashion trend 2024)</a>
+					<br/>
+					<!--Email Button:-->
+					<a id="myEmail">
+						<button class="button">Send email to me</button>
+					</a>
+					<!--Music button-->
+					<audio loop id="music">
+						<source src="audio/ethereal-vistas.mp3" type="audio/mpeg">
+					</audio>
+					<img id="music_icon" src="image/noAudio.png" onClick="bMusic()"/>
+				</div>
+			</article>
+				<!--Image player(user can click the button to change the image)-->
+				<div id="imgPlayerDiv" align="center" class="center">
+					<img id="imgPlayer"  alt="Image" src="image/fashion/fashion_1.jpg"/>
+					<br/><br/>
+					<button class="button" onClick="previousImg()">Previous</button>
+					<button class="button" onClick="nextImg()">Next</button>
+			    </div>
+				<!--Youtube Video-->
+				<div id="youtubeDiv" align="center" class="center">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/ncyohWSbwnE?si=KU84d3kbLckt13OO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				</div>
+			<!-- purposely added to clear float -->
+			<div class="clearfloat"></div>
+		</section>
+	</body>
+</html>

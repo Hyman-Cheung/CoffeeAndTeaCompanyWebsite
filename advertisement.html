@@ -1,0 +1,193 @@
+<!--
+  Student Name: Cheung Hing Lam 
+  SID: 20241431
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Advertisement</title>
+		<style type="text/css">
+			*
+			{
+				padding:0;
+				margin:0;
+			}
+			body
+			{
+				background-color:#262626;
+				animation: changeColor 5s infinite;
+				padding:30px;
+			}
+			/*********************** Anlimation ****************************/
+			@keyframes changeColor
+			{
+				0%,100%
+				{
+					background-color:#262626;
+				}
+				50%
+				{
+					background-color:#AAAAAA;
+				}
+			}
+			/********************* Advertisement **********************/
+			#advertisement
+			{
+				background-color:#FFFFFF;
+				width:500px;
+				heigth:300px;
+				margin-bottom:30px;
+				border:double 33px;
+				border-radius:30px;
+				box-shadow: 3px 3px 3px 1px #262626;
+			}
+			#discount
+			{
+				background-color:#FFFFFF;
+				box-shadow: 3px 3px 3px 1px #262626;
+				border:double 13px;
+				border-radius:30px;
+			}
+			/*************************** icon *****************************/
+			#iconCanvas
+			{
+				
+			}
+	
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			//************* Text Animation *************
+			// A function for drawing the text:
+			function drawText(c,text,x,y)
+			{
+				const ctx = c.getContext("2d");
+				ctx.font = "150px cursive"; 
+				ctx.clearRect(0,0,c.width,c.height);
+				ctx.fillText(text,x,y);
+			}
+			// Define the MoveText class:
+			let MoveText = function(canvasId)
+			{
+				this.c = document.getElementById(canvasId);
+				this.y = this.c.height*0.8;
+				this.x = this.c.width;
+				this.xSpeed = -3;
+			};
+			// Display the text:
+			MoveText.prototype.displayText = function(text)
+			{
+				drawText(this.c,text,this.x,this.y);
+			};
+			// Let the text to move:
+			MoveText.prototype.move = function()
+			{
+				this.x += this.xSpeed;
+			};
+			
+			// Change text color:
+			MoveText.prototype.changeColor = function(color)
+			{
+				let ctx = this.c.getContext('2d');
+				ctx.fillStyle = color; 
+			};
+			// Text Animation:
+			function textAnimation(canvasId,text)
+			{
+				// Create the MoveText object:
+				let moveText = new MoveText(canvasId);
+				// Start the timer to move the text:
+				let interval = setInterval(function()
+				{
+					moveText.displayText(text);
+					moveText.move();
+					// To check the coordinate, if achiving the target, stop the timer and change the text color:
+					if(moveText.x <= moveText.c.width/5)
+					{
+						// Stop the timer:
+						clearInterval(interval);
+						// Change the text color
+						moveText.changeColor("#00AA63");
+						moveText.displayText(text);
+					}
+				},30);
+			}
+			
+			//************* Image Animation *************
+			// A function for drawing the image:
+			function drawImg(x,y,c,img)
+			{
+				const ctx = c.getContext("2d");			// Get the 2D content
+				ctx.clearRect(0,0,c.width,c.height);
+				ctx.drawImage(img,x,y,80,80);
+			}
+			// Define the MoveImg class:
+			let MoveImg = function(canvasId,imgId)
+			{
+				this.c = document.getElementById(canvasId);
+				this.img = document.getElementById(imgId);
+				this.x = this.c.width;
+				this.y = this.c.height/10;
+				this.xSpeed = -5;
+			};
+			// Display image:
+			MoveImg.prototype.display = function()
+			{
+				 drawImg(this.x,this.y,this.c,this.img);
+			};
+			// Move the image:
+			MoveImg.prototype.move = function()
+			{
+				this.x += this.xSpeed; 
+			};
+			// Check the collision and change the image object:
+			MoveImg.prototype.checkCollision = function(imgId_1,imgId_2)
+			{
+				if( this.x < -80)
+				{
+					this.xSpeed = - this.xSpeed;
+					this.img = document.getElementById(imgId_2);
+				}
+				else if(this.x > this.c.width)
+				{
+					this.xSpeed = - this.xSpeed;
+					this.img = document.getElementById(imgId_1);
+				}
+			};
+			
+			// Image Animation:
+			function imageAnimation(canvasId,imageId_1,imageId_2)
+			{
+				let moveImg = new MoveImg(canvasId,imageId_1);
+				setInterval(function()
+				{
+					moveImg.display();
+					moveImg.move();
+					moveImg.checkCollision(imageId_1,imageId_2);
+				},30);
+			}
+			// Execute the following programs when this page is loaded:
+			$(document).ready(function(){
+				// Execute the text animation:
+				textAnimation("discount","80%");
+				// Execute the image animation:
+				imageAnimation("iconCanvas","iconImg_1","iconImg_2");
+			});
+		</script>
+	</head>
+	<body>
+		
+		<!--Advertisement:-->
+		<div align="center">
+			<img id="advertisement" src="./image/advertisement/advertisement.jpg" alt="Advertisement"/>
+			<br/>
+			<canvas id="discount" height="200px" width="450px"></canvas>
+		</div>
+		<!--icon:-->
+		<div id="iconOuter" align="center">
+			<img id="iconImg_1" src="./image/coffee_icon.jpg" alt="Advertisement" style="display:none"/>
+			<img id="iconImg_2" src="./image/tea_icon.jpg" alt="Advertisement" style="display:none"/>
+			<canvas id="iconCanvas" height="100" width="1300"></canvas>
+		</div>
+	</body>
+</html>
