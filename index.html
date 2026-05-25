@@ -258,7 +258,7 @@
 			var portf_accessed = false; 
 			function accessPortfolio(obj)
 			{
-				let password = "JavaScript";
+				let password = JSON.parse(window.localStorage.getItem('user')).password;
 				// User don't need to enter password when visiting the portfolio:
 				if(!portf_accessed)       
 				{
