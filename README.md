@@ -10,33 +10,33 @@ A promotional webpage for coffee and tea featuring user registration, logout, an
 ---
 ## Functions
 
-### 🧭 Top Navigation Menu
+### 1. 🧭 Top Navigation Menu
 A clear menu at the top of every page helps you quickly jump to:
 - **Founder information** – My self introduction
 - **Product pages** – Explore the company's coffee and tea selections
 - **Games** - Provide memory matching games for visitors
 
-### 🍵 Product Showcase (Two Pages)
+### 2. 🍵 Product Showcase (Two Pages)
 - **Coffee page** – Displays **coffee products** with images, names, and descriptions
 - **Tea page** – Displays **tea products** with images, names, and descriptions
 
-### 👤 User Functions
+### 3. 👤 User Functions
 - **User registration** – Sign up to personalize your visit
 - **Logout** – End your session securely
 
-### 📊 Visit Tracking & Live Info
+### 4. 📊 Visit Tracking & Live Info
 - **Visit counter** – See how many times you (or all visitors) have accessed the site
 - **Current date and time** – Always displayed so you know exactly when you’re browsing
 
-### 🎮 Memory Game (to encourage repeat visits)
+### 5. 🎮 Memory Game (to encourage repeat visits)
 - A built-in **memory matching game** – flip cards to match pairs
 - It provide Basic Level(4x4) and Advanced Level(4x6) 
 - It gives you a fun reason to come back and play again
 
-### 📢 Advertising Services Page
+### 6. 📢 Advertising Services Page
 - The site **offers advertising space**
 
-### 🎵 Background Audio (Bonus)
+### 7. 🎵 Background Audio (Bonus)
 The site includes audio elements to create a relaxing coffee/tea shop atmosphere while you browse.
 
 ---
