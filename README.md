@@ -1,6 +1,6 @@
-# Coffee and Tea Company Website 
+# Coffee and Tea Company Website ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
 
-A promotional webpage for coffee and tea featuring user registration, logout, and visit tracking. A top menu links to founder info and two pages showcasing five products with images. To boost repeat visits, it includes a memory game, displays the current date, time, and visit count, and offers advertising services.
+This promotional webpage for coffee and tea features user registration, logout, visit tracking, and advertising services. Developed with HTML, CSS, and JavaScript, it includes a top menu linking to founder info and two pages showcasing five products with images. To boost repeat visits, it also features a memory game and displays the current date, time, and visit count.
 
 ### 🚀 Try It Now 
 <a href="https://Hyman-Cheung.github.io/CoffeeAndTeaCompanyWebsite">
