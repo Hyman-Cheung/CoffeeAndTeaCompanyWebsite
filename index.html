@@ -45,40 +45,63 @@
 			#headline
 			{
 				position:relative;
-				top:15px;
+				top:16px;
+				font-size: 25px;
 			}
 			
 			/********************* Live Clock *********************/
 			#liveClock
 			{			
 				position:relative;
-				width:255px;
 				float:left;
-				margin:-25px;
-				margin-left:15px;
+				margin:0px 38px;
+				margin-top: -18px;
+
 			}
 			
-			/*********************** Visits ***********************/
-			#visitsSpan
+			/********************* Left Items From Header- *********************/
+			#header_left_div
 			{
 				position:relative;
+				display: inline-flex;
 				float:right;
-				width:160px;
+				margin-top: -15px;
+			}
+			
+			.header_left_itens
+			{
+				margin:0px 38px;	
+			}
+
+			
+			/******************** Logout icon ********************/
+			#logout_img
+			{
+				width:35px;
 				height:35px;
-				margin:-25px;
-				margin-right:120px;
+			}
+			#logout_img:hover
+			{
+				content:url(image/logout_2.png);
 			}
 			
 			/************************* Box ************************/
 			.box
 			{
 				background-color:#FFFFFF;
+				display: inline-block; /* Forces the box to wrap tightly around the text content */
+				width: auto;           /* Removes any restrictive fixed widths */
+				height: auto;          /* Removes any restrictive fixed heights */
+				padding: 6px 20px;     /* Gives nice breathing room around the changing words */
 				font-weight:normal;
 				font-family:cursive;
-				font-size:20px;
+				font-size:15px;
 				border: double 3px ;
 				border-radius:30px;
 				box-shadow: 3px 3px 3px 1px #262626,2px 2px 1px 1px #363636;
+				margin-top:-3px;
+			
+				
 			}
 			.box:hover
 			{
@@ -87,27 +110,14 @@
 				color:#FFFFFF;
 			}
 			
-			/******************** Logout icon ********************/
-			#logout_img
-			{
-				position:relative;
-				float:right;
-				margin:-25px;
-				margin-right:30px;
-				width:43px;
-				height:43px;
-			}
-			#logout_img:hover
-			{
-				content:url(image/logout_2.png);
-			}
+			
 			
 			/********************* Top Menu *********************/
 			#topMenu
 			{
 				width:90%;
 				height:35px;	
-				overflow:hidden;
+				padding:3px;
 				background-color:#363638;
 				border-bottom:solid 6px #FFAA00;
 			}
@@ -115,30 +125,30 @@
 			#topMenu > ul > li
 			{
 				display:inline-table;
-				width:300px;	
+				width:30%;	
+				position: relative;
 			}
 				
 			/******************** Sub-Menu *********************/
-			.subMenu
+			#subMenu
 			{	
 				position:absolute;
-				width:250px;
+				top: 100%;         			 /* Forces the submenu to align right below the parent li */
+				left: 50%;         			 /* Starts positioning from the center of the parent */
+				transform: translateX(-50%); /* Centers the submenu perfectly under the "Products" tab */
+				width:200px;
 				background-color:rgba(86,86,88,0.8);#565658;
 				border:solid 3px #FFFFFF;
 				border-radius:30px;
-				margin-left:26px;
 				margin-top:1px;
 				display:none;
-				clear:both;
+				z-index: 999;       		/* Ensures it stays on top of your iframe content */
 			}
-			.subMenu > li 
+			#subMenu > li 
 			{
 				margin:15px;
 			}
-			#topMenu > ul > li:hover > ul
-			{
-				display:block;
-			}
+			
 			
 			/******************* Main Content ******************/
 			section 
@@ -155,7 +165,7 @@
 			a.link:link
 			{
 				color:#FFFFFF;
-				font-size:25px;			
+				font-size:20px;			
 				text-decoration:none;
 			}
 			a.link:visited
@@ -404,11 +414,13 @@
 				checkUserRecord();
 				// Execute the showLiveClock() function to show the current date and time:
 				showLiveClock();
-				// Show the sub-menu when the function over the target:
-				$('#topMenu > ul > li').hover(function(){
-					$(this).children('ul').slideDown();
-				}, function(){
-					$(this).children('ul').fadeOut();
+				// Show the sub-menu when user click target:
+				$('#topMenu > ul > li').click(function(e){
+					if ($(this).children('ul').length > 0) 
+					{
+						$(this).children('ul').slideToggle();
+					}
+					
 				});
 			});
 		</script>
@@ -417,15 +429,17 @@
 		<!--Header:-->
 		<header class="center">
 			<!--Headline-->
-			<h1 id="headline">Coffee and Tea Company Limited</h1>
+			<h1 id="headline">Coffee & Tea Company Limited</h1>
 			<!--Live Clock:-->
 			<span id="liveClock" class="box"></span>
-			<!--Logout icon-->
-			<img id="logout_img" src="image/logout_1.png" alt="logout" onclick="logout()">
-			<!--visits:-->
-			<span id="visitsSpan" class="box">
-					Visits： <label id="visits"></label>
-			</span>
+			<div id="header_left_div">
+				<!--visits:-->
+				<span class="box" class="header_left_itens">
+						Visits： <label id="visits"></label>
+				</span>
+				<!--Logout icon-->
+				<img id="logout_img" class="header_left_itens" src="image/logout_1.png" alt="logout" onclick="logout()">
+			</div>
 		</header>
 		<!--Top Menu:-->
 		<nav id="topMenu" class="center withoutMarker">
@@ -436,7 +450,7 @@
 				<li>
 					<!--SubMenu:-->
 					<a class="link" href="#">Products</a>
-					<ul class="subMenu withoutMarker">
+					<ul id="subMenu" class="withoutMarker">
 						<li><a id="coffee" class="link" href="./Coffee.html" target="mainContent" onclick="hidePortfolio(this.textContent)">Coffee</a></li>
 						<li><a id="tea" class="link" href="./Tea.html" target="mainContent" onclick="hidePortfolio(this.textContent)">Tea</a></li>
 					</ul>
